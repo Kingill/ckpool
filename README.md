@@ -1,5 +1,6 @@
 # ckpool
 
+```
 sudo apt update
 sudo apt-get install build-essential yasm libzmq3-dev
 
@@ -13,3 +14,4 @@ cd master
 make
 sudo make install
 
+```
