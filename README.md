@@ -14,4 +14,5 @@ cd master
 make
 sudo make install
 
+/usr/local/bin/ckpool -B -c ~/ckpool/ckpool-solo/ckpool.conf
 ```
