@@ -156,13 +156,9 @@ Retrieve the **network difficulty** (~119T) to understand the threshold your Bit
 ## Best Share Info
 1. **Using Python**:
    ```
-
    /home/ckpool/extract_bestshare.py.py  
    ```
-   - Output: `Network Difficulty: 119.12T`.
-   - Latest bestshare: `330078121`
-
-   
+   - Latest bestshare: `330078121`   
 
 ## Log Management
 Prevent CKPool logs from growing too large.
