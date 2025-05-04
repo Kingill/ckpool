@@ -171,14 +171,7 @@ Prevent CKPool logs from growing too large.
 
 1. **Create Purge Script**:
    - Create `~/ckpool/ckpool-solo/purge_ckpool_log.sh`:
-     ```bash
-     #!/bin/bash
-     find /home/ckpool/ckpool-solo/logs -type f -name "*.log" -mtime +7 -delete
-     ```
-   - Make it executable:
-     ```bash
-     chmod +x ~/ckpool/ckpool-solo/purge_ckpool_log.sh
-     ```
+     
 
 2. **Schedule Purge**:
    - Edit crontab:
