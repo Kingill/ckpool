@@ -142,7 +142,13 @@ Retrieve the **network difficulty** (~119T) to understand the threshold your Bit
 
 2. **Using Python**:
    ```
-   /home/bitcoin/difficulty.py
+   python3 -m venv ~/bitcoin-venv
+   source ~/bitcoin-venv/bin/activate
+   pip3 install python-dotenv
+   pip3 install simplejson
+   pip3 install python-bitcoinrpc
+
+      /home/bitcoin/difficulty.py  
    ```
    - Output: `Network Difficulty: 119.12T`.
    - Raw mining_info: `{'blocks': 895189, 'currentblockweight': 3995574, 'currentblocktx': 636, 'difficulty': 119116256505723.5, 'networkhashps': 8.722632117999069e+20, 'pooledtx': 789, 'chain': 'main', 'warnings': ''}`.
