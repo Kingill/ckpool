@@ -159,9 +159,9 @@ Retrieve the **bestshare**.
 1. **Using Python**:
    ```  
   /home/ckpool/extract_bestshare.py
-   
-   - Latest bestshare: 330078121`.
    ```
+   - Latest bestshare: `330078121`.
+   
 
 ## Log Management
 Prevent CKPool logs from growing too large.
