@@ -157,10 +157,10 @@ Retrieve the **network difficulty** (~119T) to understand the threshold your Bit
 1. **Using Python**:
    ```
 
-   /home/bitcoin/difficulty.py  
+   /home/ckpool/extract_bestshare.py.py  
    ```
    - Output: `Network Difficulty: 119.12T`.
-   - Raw mining_info: `{'blocks': 895189, 'currentblockweight': 3995574, 'currentblocktx': 636, 'difficulty': 119116256505723.5, 'networkhashps': 8.722632117999069e+20, 'pooledtx': 789, 'chain': 'main', 'warnings': ''}`.
+   - Latest bestshare: `330078121`
 
    
 
