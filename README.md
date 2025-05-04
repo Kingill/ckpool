@@ -156,7 +156,7 @@ Retrieve the **network difficulty** (~119T) to understand the threshold your Bit
 ## Best Share Info
 1. **Using Python**:
    ```
-   /home/ckpool/extract_bestshare.py.py  
+   /home/ckpool/extract_bestshare.py
    ```
    - Latest bestshare: `330078121`   
 
