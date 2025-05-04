@@ -14,7 +14,7 @@ Welcome to the **CKPool Solo Mining Setup** guide! This document explains how to
 - [Resources](#resources)
 
 ## Overview
-**CKPool** is a high-performance Bitcoin mining pool server designed for solo or small-scale mining. When paired with a **Bitcoin Core node**, it relays block templates to your miner (e.g., Bitaxe), targeting the network difficulty (~119T). Your Bitaxe’s best share (e.g., 330M) must reach this difficulty to solve a block, offering a ~3.125 BTC + fees reward (~$325,000 at $100,000/BTC).
+**CKPool** is a high-performance Bitcoin mining pool server designed for solo or small-scale mining. When paired with a **Bitcoin Core node**, it relays block templates to your miner (e.g., Bitaxe), targeting the network difficulty (~119T). Your Bitaxe’s best share (e.g., 330M) must reach this difficulty to solve a block.
 
 This guide assumes you’re solo mining with a Bitaxe (1.14 TH/s) and a synced Bitcoin node.
 
@@ -141,26 +141,12 @@ Retrieve the **network difficulty** (~119T) to understand the threshold your Bit
    - **Difficulty**: `119116256505723.5` (~119.12T) is the target your Bitaxe’s hash must meet to solve a block.
 
 2. **Using Python**:
-   ```/home/bitcoin/difficulty.py
+   ```
+   /home/bitcoin/difficulty.py
    ```
    - Output: `Network Difficulty: 119.12T`.
-   - Raw mining_info: {'blocks': 895189, 'currentblockweight': 3995574, 'currentblocktx': 636, 'difficulty': 119116256505723.5, 'networkhashps': 8.722632117999069e+20, 'pooledtx': 789, 'chain': 'main', 'warnings': ''}
+   - Raw mining_info: `{'blocks': 895189, 'currentblockweight': 3995574, 'currentblocktx': 636, 'difficulty': 119116256505723.5, 'networkhashps': 8.722632117999069e+20, 'pooledtx': 789, 'chain': 'main', 'warnings': ''}`.
 
-
-3. **Monitor Bitaxe Best Share**:
-   - Your Bitaxe’s best share (e.g., 330M) is tracked in AxeOS. Compare it to ~119T:
-     ```python
-     import requests
-     bitaxe_ip = "192.168.1.100"
-     response = requests.get(f"http://{bitaxe_ip}/api/status")
-     best_share = response.json().get("bestshare", 0)
-     print(f"Best Share: {best_share/1e12:.2f}T vs. Network Difficulty: {difficulty/1e12:.2f}T")
-     ```
-   - Example: `Best Share: 0.33T vs. Network Difficulty: 119.12T`.
-
-4. **Context**:
-   - Your Bitaxe (1.14 TH/s) has a ~1 in 700M chance per block to produce a hash ≥119T.
-   - Shares accepted at a low threshold (~1000, per your logs) track activity but don’t earn rewards unless a block is solved.
 
 ## Log Management
 Prevent CKPool logs from growing too large.
