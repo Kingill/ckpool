@@ -141,15 +141,11 @@ Retrieve the **network difficulty** (~119T) to understand the threshold your Bit
    - **Difficulty**: `119116256505723.5` (~119.12T) is the target your Bitaxe’s hash must meet to solve a block.
 
 2. **Using Python**:
-   ```python
-   from bitcoinrpc.authproxy import AuthServiceProxy
-   rpc_user = "yourusername"
-   rpc_password = "yourpassword"
-   rpc_connection = AuthServiceProxy(f"http://{rpc_user}:{rpc_password}@127.0.0.1:8332")
-   difficulty = rpc_connection.getmininginfo()["difficulty"]
-   print(f"Network Difficulty: {difficulty/1e12:.2f}T")
+   ```/home/bitcoin/difficulty.py
    ```
    - Output: `Network Difficulty: 119.12T`.
+   - Raw mining_info: {'blocks': 895189, 'currentblockweight': 3995574, 'currentblocktx': 636, 'difficulty': 119116256505723.5, 'networkhashps': 8.722632117999069e+20, 'pooledtx': 789, 'chain': 'main', 'warnings': ''}
+
 
 3. **Monitor Bitaxe Best Share**:
    - Your Bitaxe’s best share (e.g., 330M) is tracked in AxeOS. Compare it to ~119T:
