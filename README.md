@@ -1,6 +1,6 @@
 # CKPool Solo Mining Setup
 
-Welcome to the **CKPool Solo Mining Setup** guide! This document explains how to install and configure **CKPool**, a lightweight Bitcoin mining pool server, to solo mine with a miner like the **Bitaxe** (1.14 TH/s) using a **Bitcoin Core node**. You’ll learn to retrieve the network difficulty (~119T in May 2025) and monitor your mining performance.
+Welcome to the **CKPool Solo Mining Setup** guide! This document explains how to install and configure **CKPool**, a lightweight Bitcoin mining pool server, to solo mine with a miner like the **Bitaxe** (1.07 TH/s) using a **Bitcoin Core node**. You’ll learn to retrieve the network difficulty (~119T in May 2025) and monitor your mining performance.
 
 ## Table of Contents
 - [Overview](#overview)
@@ -16,11 +16,11 @@ Welcome to the **CKPool Solo Mining Setup** guide! This document explains how to
 ## Overview
 **CKPool** is a high-performance Bitcoin mining pool server designed for solo or small-scale mining. When paired with a **Bitcoin Core node**, it relays block templates to your miner (e.g., Bitaxe), targeting the network difficulty (~119T). Your Bitaxe’s best share (e.g., 330M) must reach this difficulty to solve a block.
 
-This guide assumes you’re solo mining with a Bitaxe (1.14 TH/s) and a synced Bitcoin node.
+This guide assumes you’re solo mining with a Bitaxe (1.07 TH/s) and a synced Bitcoin node.
 
 ## Prerequisites
 - **Hardware**:
-  - Bitaxe miner (1.14 TH/s, running AxeOS).
+  - Bitaxe miner (1.07 TH/s, running AxeOS).
   - Linux server (e.g., Ubuntu) for CKPool.
   - Computer running Bitcoin Core (fully synced, ~600 GB storage).
 - **Software**:
@@ -116,7 +116,7 @@ Start CKPool to relay block templates from your node to your Bitaxe.
 
 2. **Verify Operation**:
    - Check CKPool logs in `~/ckpool/ckpool-solo/logs`.
-   - Ensure Bitaxe shows hashrate (~1.14 TH/s) in AxeOS (`http://[Bitaxe-IP]`).
+   - Ensure Bitaxe shows hashrate (~1.07 TH/s) in AxeOS (`http://[Bitaxe-IP]`).
 
 ## Monitoring Mining Info
 Retrieve the **network difficulty** (~119T) to understand the threshold your Bitaxe must meet to solve a block.
