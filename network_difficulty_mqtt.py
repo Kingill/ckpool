@@ -38,6 +38,8 @@ rpc_port = os.getenv("RPC_PORT", "8332")
 mqtt_broker = os.getenv("MQTT_BROKER", "localhost")
 mqtt_port = os.getenv("MQTT_PORT", "1883")
 mqtt_topic = os.getenv("MQTT_TOPIC", "bitcoin/mininginfo")
+mqtt_user = os.getenv("MQTT_USER")
+mqtt_password = os.getenv("MQTT_PASSWORD")
 
 # Validate environment variables
 required_vars = {"RPC_USER": rpc_user, "RPC_PASSWORD": rpc_password}
@@ -58,6 +60,13 @@ rpc_connection = AuthServiceProxy(rpc_url)
 
 # MQTT client setup
 mqtt_client = mqtt.Client()
+
+# Set MQTT username and password if provided
+if mqtt_user and mqtt_password:
+    mqtt_client.username_pw_set(mqtt_user, mqtt_password)
+    logger.debug("MQTT authentication set with provided username and password")
+elif mqtt_user or mqtt_password:
+    logger.warning("Both MQTT_USER and MQTT_PASSWORD must be set for authentication. Skipping auth.")
 
 try:
     with patched_json():
