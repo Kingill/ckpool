@@ -147,8 +147,8 @@ Retrieve the **network difficulty** (~119T) to understand the threshold your Bit
    pip3 install python-dotenv
    pip3 install simplejson
    pip3 install python-bitcoinrpc
-
-      /home/bitcoin/difficulty.py  
+   
+   /home/bitcoin/difficulty.py  
    ```
    - Output: `Network Difficulty: 119.12T`.
    - Raw mining_info: `{'blocks': 895189, 'currentblockweight': 3995574, 'currentblocktx': 636, 'difficulty': 119116256505723.5, 'networkhashps': 8.722632117999069e+20, 'pooledtx': 789, 'chain': 'main', 'warnings': ''}`.
