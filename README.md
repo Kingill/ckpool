@@ -144,6 +144,7 @@ Retrieve the **network difficulty** (~119T) to understand the threshold your Bit
    ```
    python3 -m venv ~/bitcoin-venv
    source ~/bitcoin-venv/bin/activate
+
    pip3 install python-dotenv
    pip3 install simplejson
    pip3 install python-bitcoinrpc
