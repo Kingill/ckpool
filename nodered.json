@@ -2,7 +2,7 @@
     {
         "id": "d9cf4769d39ae968",
         "type": "tab",
-        "label": "Flux 1",
+        "label": "Mining",
         "disabled": false,
         "info": "",
         "env": []
@@ -25,28 +25,12 @@
         "wires": [
             [
                 "6aa5874e97510889",
-                "fd436a79068b2887",
                 "38b2112114f675ef",
                 "aa3bbf582518a94d",
-                "fdc364d9cb48b949"
+                "fdc364d9cb48b949",
+                "017711dda73442b8"
             ]
         ]
-    },
-    {
-        "id": "fd436a79068b2887",
-        "type": "debug",
-        "z": "d9cf4769d39ae968",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 360,
-        "y": 60,
-        "wires": []
     },
     {
         "id": "56a0817f02aa1d58",
@@ -69,7 +53,8 @@
                 "fbd099ec299f0e69",
                 "29f8b92e9249cc5d",
                 "fe346fb237064f5d",
-                "cb6237434268ccea"
+                "cb6237434268ccea",
+                "31558c6a2dd8d24b"
             ]
         ]
     },
@@ -165,7 +150,7 @@
         "group": "bac27a80a4a2cebd",
         "name": "Network Difficulty ",
         "label": "Network Difficulty ",
-        "order": 4,
+        "order": 5,
         "width": 0,
         "height": 0,
         "topic": "topic",
@@ -233,7 +218,6 @@
         "y": 340,
         "wires": [
             [
-                "5bc6f49a77d05523",
                 "e12fdf98cacf4790"
             ]
         ]
@@ -650,29 +634,12 @@
         ]
     },
     {
-        "id": "5bc6f49a77d05523",
-        "type": "debug",
-        "z": "d9cf4769d39ae968",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 900,
-        "y": 380,
-        "wires": []
-    },
-    {
         "id": "e12fdf98cacf4790",
         "type": "function",
         "z": "d9cf4769d39ae968",
         "name": "function 1",
         "func": "var value = Number(msg.payload);\n\nif (value >= 1e12) {\n    msg.payload = (value / 1e12).toFixed(2) + \"T\";\n} else if (value >= 1e9) {\n    msg.payload = (value / 1e9).toFixed(2) + \"G\";\n} else if (value >= 1e6) {\n    msg.payload = (value / 1e6).toFixed(2) + \"M\";\n} else if (value >= 1e3) {\n    msg.payload = (value / 1e3).toFixed(2) + \"K\";\n} else {\n    msg.payload = value.toString();\n}\n\nreturn msg;\n",
         "outputs": 1,
-        "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -692,7 +659,6 @@
         "name": "function 2",
         "func": "var value = Number(msg.payload);\n\nif (value >= 1e12) {\n    msg.payload = (value / 1e12).toFixed(2) + \"T\";\n} else if (value >= 1e9) {\n    msg.payload = (value / 1e9).toFixed(2) + \"G\";\n} else if (value >= 1e6) {\n    msg.payload = (value / 1e6).toFixed(2) + \"M\";\n} else if (value >= 1e3) {\n    msg.payload = (value / 1e3).toFixed(2) + \"K\";\n} else {\n    msg.payload = value.toString();\n}\n\nreturn msg;\n",
         "outputs": 1,
-        "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -712,7 +678,6 @@
         "name": "function 3",
         "func": "var value = Number(msg.payload);\n\nif (value >= 1e12) {\n    msg.payload = (value / 1e12).toFixed(2) + \"T\";\n} else if (value >= 1e9) {\n    msg.payload = (value / 1e9).toFixed(2) + \"G\";\n} else if (value >= 1e6) {\n    msg.payload = (value / 1e6).toFixed(2) + \"M\";\n} else if (value >= 1e3) {\n    msg.payload = (value / 1e3).toFixed(2) + \"K\";\n} else {\n    msg.payload = value.toString();\n}\n\nreturn msg;\n",
         "outputs": 1,
-        "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -732,7 +697,6 @@
         "name": "function 4",
         "func": "var value = Number(msg.payload);\nmsg.payload = value.toFixed(2) + \"W\";\nreturn msg;",
         "outputs": 1,
-        "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -752,7 +716,6 @@
         "name": "function 5",
         "func": "var value = Number(msg.payload);\nmsg.payload = (value / 1000).toFixed(2) + \"V\";\nreturn msg;",
         "outputs": 1,
-        "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -772,7 +735,6 @@
         "name": "function 6",
         "func": "var value = Number(msg.payload);\nmsg.payload = value.toFixed(2) + \"°C\";\nreturn msg;",
         "outputs": 1,
-        "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -823,7 +785,6 @@
         "name": "function 7",
         "func": "var value = Number(msg.payload);\nmsg.payload = (value / 1000).toFixed(2) + \"TH/s\";\nreturn msg;\n",
         "outputs": 1,
-        "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -843,7 +804,6 @@
         "name": "function 8",
         "func": "var value = Number(msg.payload);\nmsg.payload = (value / 1000).toFixed(2);\nreturn msg;\n",
         "outputs": 1,
-        "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -915,10 +875,164 @@
         ]
     },
     {
+        "id": "017711dda73442b8",
+        "type": "change",
+        "z": "d9cf4769d39ae968",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.networkhashps_EHs",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 260,
+        "wires": [
+            [
+                "03155245bd940585"
+            ]
+        ]
+    },
+    {
+        "id": "3bdce24763262432",
+        "type": "ui-text-input",
+        "z": "d9cf4769d39ae968",
+        "group": "bac27a80a4a2cebd",
+        "name": "networkhashps",
+        "label": "networkhashps",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "topic": "topic",
+        "topicType": "msg",
+        "mode": "text",
+        "tooltip": "",
+        "delay": 300,
+        "passthru": true,
+        "sendOnDelay": false,
+        "sendOnBlur": true,
+        "sendOnEnter": true,
+        "className": "",
+        "clearable": false,
+        "sendOnClear": false,
+        "icon": "",
+        "iconPosition": "left",
+        "iconInnerPosition": "inside",
+        "x": 1020,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "03155245bd940585",
+        "type": "function",
+        "z": "d9cf4769d39ae968",
+        "name": "function 9",
+        "func": "var value = Number(msg.payload);\nmsg.payload = value.toFixed(2) + \"EH/s\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 260,
+        "wires": [
+            [
+                "3bdce24763262432"
+            ]
+        ]
+    },
+    {
+        "id": "31558c6a2dd8d24b",
+        "type": "change",
+        "z": "d9cf4769d39ae968",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.uptimeSeconds",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 680,
+        "wires": [
+            [
+                "c371e4c6fabc79d9"
+            ]
+        ]
+    },
+    {
+        "id": "c371e4c6fabc79d9",
+        "type": "function",
+        "z": "d9cf4769d39ae968",
+        "name": "function 10",
+        "func": "let totalSeconds = Number(msg.payload);\n\nlet days = Math.floor(totalSeconds / (24 * 3600));\ntotalSeconds %= (24 * 3600);\n\nlet hours = Math.floor(totalSeconds / 3600);\ntotalSeconds %= 3600;\n\nlet minutes = Math.floor(totalSeconds / 60);\nlet seconds = totalSeconds % 60;\n\nmsg.payload = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 680,
+        "wires": [
+            [
+                "cff9fb7a9f3858a4"
+            ]
+        ]
+    },
+    {
+        "id": "cff9fb7a9f3858a4",
+        "type": "ui-text-input",
+        "z": "d9cf4769d39ae968",
+        "group": "6af493594a76fe0d",
+        "name": "uptime",
+        "label": "uptime",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "topic": "topic",
+        "topicType": "msg",
+        "mode": "text",
+        "tooltip": "",
+        "delay": 300,
+        "passthru": true,
+        "sendOnDelay": false,
+        "sendOnBlur": true,
+        "sendOnEnter": true,
+        "className": "",
+        "clearable": false,
+        "sendOnClear": false,
+        "icon": "",
+        "iconPosition": "left",
+        "iconInnerPosition": "inside",
+        "x": 870,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "50bbcfd656c41a2b",
         "type": "mqtt-broker",
         "name": "",
-        "broker": "localhost",
+        "broker": "ec2-52-47-41-236.eu-west-3.compute.amazonaws.com",
         "port": "1883",
         "clientid": "",
         "autoConnect": true,
@@ -926,7 +1040,6 @@
         "protocolVersion": "3",
         "keepalive": "60",
         "cleansession": true,
-        "autoUnsubscribe": true,
         "birthTopic": "",
         "birthQos": "0",
         "birthRetain": "false",
@@ -976,58 +1089,54 @@
     {
         "id": "bbfded823da05b37",
         "type": "ui-page",
-        "name": "Page 1",
-        "ui": "aa882840dd5ca3c3",
-        "path": "/page1",
+        "name": "Mining",
+        "ui": "b358013e3d47ac62",
+        "path": "/mining",
         "icon": "home",
         "layout": "grid",
         "theme": "6c503266d0ce4f56",
         "breakpoints": [
             {
                 "name": "Default",
-                "px": 0,
-                "cols": 3
+                "px": "0",
+                "cols": "3"
             },
             {
                 "name": "Tablet",
-                "px": 576,
-                "cols": 6
+                "px": "576",
+                "cols": "6"
             },
             {
                 "name": "Small Desktop",
-                "px": 768,
-                "cols": 9
+                "px": "768",
+                "cols": "9"
             },
             {
                 "name": "Desktop",
-                "px": 1024,
-                "cols": 12
+                "px": "1024",
+                "cols": "12"
             }
         ],
-        "order": 1,
+        "order": 2,
         "className": "",
         "visible": "true",
         "disabled": "false"
     },
     {
-        "id": "aa882840dd5ca3c3",
+        "id": "b358013e3d47ac62",
         "type": "ui-base",
         "name": "My Dashboard",
         "path": "/dashboard",
-        "appIcon": "",
+        "appIcon": "https://cdn-icons-png.flaticon.com/512/7047/7047060.png",
         "includeClientData": true,
         "acceptsClientConfig": [
             "ui-notification",
             "ui-control"
         ],
         "showPathInSidebar": false,
-        "headerContent": "page",
+        "showPageTitle": true,
         "navigationStyle": "default",
-        "titleBarStyle": "default",
-        "showReconnectNotification": true,
-        "notificationDisplayTime": 1,
-        "showDisconnectNotification": true,
-        "allowInstall": true
+        "titleBarStyle": "default"
     },
     {
         "id": "6c503266d0ce4f56",
