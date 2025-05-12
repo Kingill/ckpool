@@ -1,40 +1,14 @@
 pipeline {
     agent any
-
-    tools {
-        // Optional: configure tools like JDK or Maven if needed
-    }
-
     stages {
-        stage('Checkout') {
+        stage('Clone Repository') {
             steps {
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: '*/main']],
-                    userRemoteConfigs: [[url: 'https://github.com/Kingill/ckpool.git']]
-                ])
+                git url: 'https://github.com/Kingill/ckpool.git', branch: 'main'
             }
         }
-
-        stage('Build Info') {
+        stage('Install Dependencies') {
             steps {
-                echo 'Build stage placeholder. Consider using build tools or scripts instead of shell commands.'
+                sh 'sudo apt-get update && sudo apt-get install -y build-essential yasm autoconf automake libtool'
             }
-        }
-
-        stage('Post-Build') {
-            steps {
-                echo 'Build finished.'
-            }
-        }
-    }
-
-    post {
-        success {
-            echo '🎉 Success'
-        }
-        failure {
-            echo '❌ Failure'
-        }
     }
 }
