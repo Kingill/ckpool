@@ -1,29 +1,11 @@
 pipeline {
     agent any
-
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/Kingill/ckpool.git'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'echo "Build step (customize me)"'
-            }
-        }
-
         stage('Test') {
             steps {
-                sh 'echo "Test step (customize me)"'
+                git url: 'https://github.com/Kingill/ckpool.git', branch: 'main', credentialsId: 'github-pat-ckpool'
+                sh 'ls'
             }
-        }
-    }
-
-    post {
-        always {
-            echo 'Cleaning up...'
         }
     }
 }
