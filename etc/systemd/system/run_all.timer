@@ -1,0 +1,24 @@
+[Unit]
+Description=Run ckpool MQTT Python scripts once
+After=network.target
+
+[Service]
+Type=oneshot
+User=ckpool
+WorkingDirectory=/home/ckpool
+ExecStart=/home/ckpool/run_all.sh
+Environment=PATH=/home/ckpool/bitcoin-venv/bin:/usr/bin:/bin
+StandardOutput=journal
+StandardError=journal
+root@gilles-MS-7C91:/etc/systemd/system# cat run_all.timer
+[Unit]
+Description=Run ckpool MQTT Python scripts every minute
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=1min
+Persistent=true
+Unit=run_all.service
+
+[Install]
+WantedBy=timers.target
