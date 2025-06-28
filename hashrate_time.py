@@ -28,14 +28,28 @@ client.connect(MQTT_BROKER, MQTT_PORT)
 
 # Tail log file (like `tail -F`)
 def follow_log(file_path):
-    with open(file_path, 'r') as f:
-        f.seek(0, os.SEEK_END)  # Go to end of file
-        while True:
-            line = f.readline()
-            if not line:
-                time.sleep(0.1)
-                continue
+    file = open(file_path, 'r')
+    file.seek(0, os.SEEK_END)
+    inode = os.fstat(file.fileno()).st_ino
+
+    while True:
+        line = file.readline()
+        if line:
             yield line.strip()
+        else:
+            try:
+                # Check if file was rotated
+                if os.stat(file_path).st_ino != inode:
+                    new_file = open(file_path, 'r')
+                    file.close()
+                    file = new_file
+                    inode = os.fstat(file.fileno()).st_ino
+                    print("Log file rotated — reopened.")
+                time.sleep(0.2)
+            except FileNotFoundError:
+                time.sleep(0.5)
+
+
 
 # Main loop
 try:
