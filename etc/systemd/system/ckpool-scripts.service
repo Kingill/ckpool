@@ -1,0 +1,16 @@
+[Unit]
+Description=Run ckpool MQTT Python scripts every 15 seconds
+After=network.target
+
+[Service]
+User=ckpool
+WorkingDirectory=/home/ckpool
+ExecStart=/bin/bash /home/ckpool/run_all.sh
+Restart=always
+RestartSec=5
+Environment=PATH=/home/ckpool/bitcoin-venv/bin:/usr/bin:/bin
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target
