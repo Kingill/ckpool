@@ -1,0 +1,8 @@
+[Unit]
+Description=Supervision - Check Bitaxe and publish MQTT
+
+[Service]
+Type=oneshot
+User=ckpool
+WorkingDirectory=/home/ckpool
+ExecStart=/home/ckpool/bitcoin-venv/bin/python3 /home/ckpool/scripts/supervision.py

@@ -1,0 +1,38 @@
+[Unit]
+Description=CKPool - Bitcoin Mining Pool
+
+After=network-online.target
+Wants=network-online.target
+After=bitcoind.service
+Requires=bitcoind.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ckpool/ckpool-solo
+ExecStart=/usr/local/bin/ckpool -B -c /home/ckpool/ckpool-solo/ckpool.conf
+
+
+#KillSignal=SIGINT
+ExecStop=/usr/bin/pkill -f ckpool
+
+# Process management
+####################
+
+Restart=on-failure
+TimeoutStartSec=infinity
+TimeoutStopSec=600
+
+
+# Directory creation and permissions
+####################################
+
+# Run as ckpool:ckpool
+User=ckpool
+Group=ckpool
+
+# /run/ckpool
+RuntimeDirectory=ckpool
+RuntimeDirectoryMode=0710
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,19 @@
+[Unit]
+Description=Hashrate MQTT Log Monitor (venv)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/home/ckpool/bitcoin-venv/bin/python /home/ckpool/scripts/hashrate_time.py
+WorkingDirectory=/home/ckpool/
+User=ckpool
+Group=ckpool
+Restart=always
+RestartSec=5
+EnvironmentFile=/etc/hashrate/.env
+Environment=PYTHONUNBUFFERED=1
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

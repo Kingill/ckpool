@@ -1,0 +1,11 @@
+[Unit]
+Description=Run ckpool MQTT Python scripts every minute
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=1min
+Persistent=true
+Unit=run_all.service
+
+[Install]
+WantedBy=timers.target

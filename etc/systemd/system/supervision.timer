@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Supervision Script every 1 minute
+
+[Timer]
+OnBootSec=30
+OnUnitActiveSec=60
+Unit=supervision.service
+
+[Install]
+WantedBy=timers.target
