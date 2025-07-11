@@ -1,0 +1,12 @@
+{
+"btcd" :  [
+	{
+		"url" : "localhost:8332",
+		"auth" : "btcd username",
+		"pass" : "btcd password",
+		"notify" : true
+	}
+],
+"btcaddress" : "your btc address",
+"logdir" : "logs"
+}
