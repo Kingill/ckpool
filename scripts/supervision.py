@@ -13,7 +13,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     #handlers=[logging.StreamHandler(), logging.FileHandler('server_monitor.log')]
-    handlers=[logging.StreamHandler(), logging.FileHandler('/home/ckpool/logs/server_monitor.log')]
+    handlers=[logging.StreamHandler(), logging.FileHandler('/home/ckpool/ckpool-solo/logs/server_monitor.log')]
 
 )
 logger = logging.getLogger(__name__)
