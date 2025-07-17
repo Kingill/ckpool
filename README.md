@@ -1,151 +1,125 @@
-BUILDING:
+CKPool
+CKPool is a high-performance Bitcoin mining pool server and proxy software. It supports solo mining, proxy, passthrough, and redirector modes, with flexible configuration options and minimal dependencies.
+Building
+Dependencies
+CKPool requires:
 
-Building ckpool requires no dependencies outside of the basic build tools and yasm on any linux installation. Recommended zmq notification support (ckpool only) requires the zmq devel library installed.
+Basic build tools
+yasm
+Optional: libzmq3-dev for ZMQ notification support (CKPool only)
 
-Building with zmq (preferred build but not required for ckproxy):
-
+Build Instructions
+With ZMQ (preferred for CKPool, not required for CKProxy):
 sudo apt-get install build-essential yasm libzmq3-dev
-
 ./configure
-
 make
 
-Basic build:
-
+Basic Build (without ZMQ):
 sudo apt-get install build-essential yasm
-
 ./configure
-
 make
 
-Building from git also requires autoconf, automake, and pkgconf:
-
+Building from Git:
+Requires additional tools: autoconf, automake, and pkgconf.
 sudo apt-get install build-essential yasm autoconf automake libtool libzmq3-dev pkgconf
-
 ./autogen.sh
-
 ./configure
-
 make
 
-Binaries will be built in the src/ subdirectory. Binaries generated will be:
+Output
+Binaries are generated in the src/ subdirectory:
 
-ckpool - The main pool back end
+ckpool: Main pool backend
+ckproxy: Proxy mode link
+ckpmsg: Messaging utility for CKPool
+notifier: Block change notification for bitcoind
 
-ckproxy - A link to ckpool that automatically starts it in proxy mode
+Installation
+Installation is optional; CKPool can run directly from the build directory. To install:
+sudo make install
 
-ckpmsg - An application for passing messages in libckpool format to ckpool
+Running
+CKPool supports several command-line options:
 
-notifier - An application designed to be run with bitcoind's -blocknotify to notify ckpool of block changes.
 
-Installation is NOT required and ckpool can be run directly from the directory it's built in but it can be installed with: sudo make install
 
-RUNNING:
+Option
+Description
 
-ckpool supports the following options:
 
--B | --btcsolo
 
--c CONFIG | --config CONFIG
+-B, --btcsolo
+Start in BTCSOLO mode for solo mining; usernames must be valid Bitcoin addresses.
 
--g GROUP | --group GROUP
 
--H | --handover
+-c CONFIG, --config CONFIG
+Specify custom configuration file (defaults: ckpool.conf, ckproxy.conf, ckpassthrough.conf, ckredirector.conf).
 
--h | --help
 
--k | --killold
+-g GROUP, --group GROUP
+Run as specified group ID.
 
--L | --log-shares
 
--l LOGLEVEL | --loglevel LOGLEVEL
+-H, --handover
+Take over client socket from a running CKPool instance with the same name.
 
--N | --node
 
--n NAME | --name NAME
+-h, --help
+Display help message.
 
--P | --passthrough
 
--p | --proxy
+-k, --killold
+Shut down existing CKPool instance with the same name.
 
--R | --redirector
 
--s SOCKDIR | --sockdir SOCKDIR
+-L, --log-shares
+Log per-share data by block height and workbase.
 
--u | --userproxy
 
--B will start ckpool in BTCSOLO mode, which is designed for solo mining. All usernames connected must be valid bitcoin addresses, and 100% of the block reward will go to the user solving the block, minus any donation set.
+-l LOGLEVEL, --loglevel LOGLEVEL
+Set log level (default: 5, max debug: 7).
 
--c <CONFIG> tells ckpool to override its default configuration filename and load the specified one. If -c is not specified, ckpool looks for ckpool.conf, in proxy mode it looks for ckproxy.conf, in passthrough mode for ckpassthrough.conf and in redirector mode for ckredirector.conf
 
--g <GROUP> will start ckpool as the group ID specified.
+-N, --node
+Start in passthrough node mode with local bitcoind.
 
--H will make ckpool attempt to receive a handover from a running incidence of ckpool with the same name, taking its client listening socket and shutting it down.
 
--h displays the above help
+-n NAME, --name NAME
+Set process name for multiple instances (defaults: ckpool, ckproxy, ckpassthrough, ckredirector, cknode).
 
--k will make ckpool shut down an existing instance of ckpool with the same name, killing it if need be. Otherwise ckpool will refuse to start if an instance of the same name is already running.
 
--L will log per share information in the logs directory divided by block height and then workbase.
+-P, --passthrough
+Start in passthrough proxy mode, streaming to an upstream pool.
 
--l <LOGLEVEL will change the log level to that specified. Default is 5 and maximum debug is level 7.
 
--N will start ckpool in passthrough node mode where it behaves like a passthrough but requires a locally running bitcoind and can submit blocks itself in addition to passing the shares back to the upstream pool. It also monitors hashrate and requires more resources than a simple passthrough. Be aware that upstream pools must specify dedicated IPs/ports that accept incoming node requests with the nodeserver directive described below.
+-p, --proxy
+Start in proxy mode, presenting shares as a single user to an upstream CKPool.
 
--n <NAME> will change the ckpool process name to that specified, allowing multiple different named instances to be running. By default the variant names are used: ckpool, ckproxy, ckpassthrough, ckredirector, cknode.
 
--P will start ckpool in passthrough proxy mode where it collates all incoming connections and streams all information on a single connection to an upstream pool specified in ckproxy.conf . Downstream users all retain their individual presence on the master pool. Standalone mode is implied.
+-R, --redirector
+Start in redirector mode, filtering inactive users and redirecting to configured pools.
 
--p will start ckpool in proxy mode where it appears to be a local pool handling clients as separate entities while presenting shares as a single user to the upstream pool specified. Note that the upstream pool needs to be a ckpool for it to scale to large hashrates. Standalone mode is Optional.
 
--R will start ckpool in a variant of passthrough mode. It is designed to be a front end to filter out users that never contribute any shares. Once an accepted share from the upstream pool is detected, it will issue a redirect to one of the redirecturl entries in the configuration file. It will cycle over entries if multiple exist, but try to keep all clients from the same IP redirecting to the same pool.
+-s SOCKDIR, --sockdir SOCKDIR
+Set directory for communication sockets (default: /tmp).
 
--s <SOCKDIR> tells ckpool which directory to place its own communication sockets (/tmp by default)
 
--u Userproxy mode will start ckpool in proxy mode as per the -p option above, but in addition it will accept username/passwords from the stratum connects and try to open additional connections with those credentials to the upstream pool specified in the configuration file and then reconnect miners to mine with their chosen username/password to the upstream pool.
+-u, --userproxy
+Proxy mode with per-user upstream connections using provided credentials.
 
-ckpmsg and notifier support the -n, -p and -s options
 
-CONFIGURATION
+ckpmsg and notifier support -n, -p, and -s options.
+Configuration
+CKPool uses a JSON-encoded configuration file (ckpool.conf or ckproxy.conf by default). Sample configurations are included in the source.
+Key Configuration Options
 
-At least one bitcoind is mandatory in ckpool mode with the minimum requirements of server, rpcuser and rpcpassword set.
 
-Ckpool takes a json encoded configuration file in ckpool.conf by default or ckproxy.conf in proxy or passthrough mode unless specified with -c. Sample configurations for ckpool and ckproxy are included with the source. Entries after the valid json are ignored and the space there can be used for comments. The options recognised are as follows:
 
-"btcd" : This is an array of bitcoind(s) with the options url, auth and pass which match the configured bitcoind. The optional boolean field notify tells ckpool this btcd is using the notifier and does not need to be polled for block changes. If no btcd is specified, ckpool will look for one on localhost:8332 with the username "user" and password "pass".
+Option
+Description
 
-"proxy" : This is an array in the same format as btcd above but is used in proxy and passthrough mode to set the upstream pool and is mandatory.
 
-"btcaddress" : This is the bitcoin address to try to generate blocks to. It is ignored in BTCSOLO mode.
 
-"btcsig" : This is an optional signature to put into the coinbase of mined blocks.
+btcd
+Array of bitcoind(s) with url, auth, pass, and optional notify (for notifier). Defaults to `localhost:
 
-"blockpoll" : This is the frequency in milliseconds for how often to check for new network blocks and is 100 by default. It is intended to be a backup only for when the notifier is not set up and only polls if the "notify" field is not set on a btcd.
-
-"donation" : Optional percentage donation of block reward that goes to the developer of ckpool to assist in further development and maintenance of the code. Takes a floating point value and defaults to zero if not set.
-
-"nodeserver" : This takes the same format as the serverurl array and specifies additional IPs/ports to bind to that will accept incoming requests for mining node communications. It is recommended to selectively isolate this address to minimise unnecessary communications with unauthorised nodes.
-
-"nonce1length" : This is optional allowing the extranonce1 length to be chosen from 2 to 8. Default 4
-
-"nonce2length" : This is optional allowing the extranonce2 length to be chosen from 2 to 8. Default 8
-
-"update_interval" : This is the frequency that stratum updates are sent out to miners and is set to 30 seconds by default to help perpetuate transactions for the health of the bitcoin network.
-
-"version_mask" : This is a mask of which bits in the version number it is valid for a client to alter and is expressed as an hex string. Eg "00fff000" Default is "1fffe000".
-
-"serverurl" : This is the IP(s) to try to bind ckpool uniquely to, otherwise it will attempt to bind to all interfaces in port 3333 by default in pool mode and 3334 in proxy mode. Multiple entries can be specified as an array by either IP or resolvable domain name but the executable must be able to bind to all of them and ports up to 1024 usually require privileged access.
-
-"redirecturl" : This is an array of URLs that ckpool will redirect active miners to in redirector mode. They must be valid resolvable URLs+ports.
-
-"mindiff" : Minimum diff that vardiff will allow miners to drop to. Default 1
-
-"startdiff" : Starting diff that new clients are given. Default 42
-
-"maxdiff" : Optional maximum diff that vardiff will clamp to where zero is no maximum.
-
-"logdir" : Which directory to store pool and client logs. Default "logs"
-
-"maxclients" : Optional upper limit on the number of clients ckpool will accept before rejecting further clients.
-
-"zmqblock" : Optional interface to use for zmq blockhash notification - ckpool only. Requires use of matched bitcoind -zmqpubhashblock option. Default: tcp://127.0.0.1:28332
